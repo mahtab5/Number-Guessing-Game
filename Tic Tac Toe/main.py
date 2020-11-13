@@ -10,6 +10,7 @@ x_point = 0
 o_point = 0
 istarted = True
 name = None
+mode = None
 
 # separte
 
@@ -73,8 +74,16 @@ def multiplayer():
 
 def computer():
     print('Computer Mode ')
+    print()
     global istarted
     if istarted:
+        global mode
+        print('1)Normal\n2)Hard\n')
+        mode = input('Enter The Mode: ')
+        if mode == '2':
+            mode = 'Hard'
+        else:
+            mode = 'Normal'
         global name
         name = input('Enter Your Name Here: ')
         if name.split() == '' or name == '\n' or not name:
@@ -83,7 +92,7 @@ def computer():
     turn = randint(0, 1)
     counter = 0
     computer = True
-
+    print(f'{mode} Mode: ', end='')
     while not x.gameOver() and not x.isFinished():
         if turn % 2 == 0:
             print()
@@ -114,12 +123,12 @@ def computer():
             print("Computer's Turn...")
 
             if counter % 2 == 0:
-                y.bot_move(x.pos, 'O')
+                y.bot_move(x.pos, 'O',mode)
                 turn += 1
                 counter += 1
                 computer = True
             else:
-                y.bot_move(x.pos, 'X')
+                y.bot_move(x.pos, 'X',mode)
                 turn += 1
                 counter += 1
                 computer = True
@@ -162,7 +171,7 @@ while start == '1':
         o_point = 0
         istarted = True
 
-        print('You Have 3 Options Available: \n1)Play With Computer\n2)Play Multiplayer\n3)See The Positions\n')
+        print('You Have 3 Options Available: \n1)Play With Computer\n2)Play Multiplayer\n3)See The Positions\n4)Exit\n')
 
         options = input('Enter Your Choice Here: ')
 
@@ -176,6 +185,9 @@ while start == '1':
             x.reset()
             print()
 
+        elif options == '4':
+            break
+
         else:
             cmp = True
             computer()
@@ -184,6 +196,7 @@ while start == '1':
         j = input('Press Enter To Play Again, 1 To See The Options :')
 
         if j == '1':
+            x.reset()
             opt = True
             continue
 

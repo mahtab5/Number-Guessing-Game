@@ -142,14 +142,14 @@ class Bot:
         else:
             return self.willWin(pos, 'O')
 
-    def bot_move(self, pos, n):
-        if self.__wilbotwin(pos, n):
-            c = self.__wilbotwin(pos, n)
-            pos[c] = n
+    def bot_move(self, pos, n, mode):
+        if self.isEmpty(pos):
+            pos[corners[randint(0,3)]] = n
             return pos
 
-        elif self.isEmpty(pos):
-            pos[corners[randint(0,3)]] = n
+        elif self.__wilbotwin(pos, n):
+            c = self.__wilbotwin(pos, n)
+            pos[c] = n
             return pos
 
         elif self.willWin(pos, n):
@@ -157,11 +157,11 @@ class Bot:
             pos[c] = n
             return pos
 
-        elif pos[middle] == '-':
+        elif pos[middle] == '-' and mode != 'Normal':
             pos[middle] = n
             return pos
 
-        elif self.__match_move(pos, n):
+        elif self.__match_move(pos, n) and mode != 'Normal':
             c = self.__match_move(pos, n)
             pos[c[randint(0, len(c)-1)]] = n
             return pos
