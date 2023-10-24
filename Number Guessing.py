@@ -1,17 +1,6 @@
 from random import randint
 import math
 
-class color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
 
 def isprime(n) -> bool:
     if n == 1:
@@ -22,22 +11,25 @@ def isprime(n) -> bool:
 
     return True
 
+
 def clue(n):
     if isprime(n):
-        print(color.PURPLE+'The Number Is A Prime'+color.END)
+        print('The Number Is A Prime')
     else:
-        print(color.PURPLE+'The Number Is Not A Prime'+color.END)
+        print('The Number Is Not A Prime')
+
 
 def clue2(n):
     if math.sqrt(n) - int(math.sqrt(n)) == 0:
-        print(color.PURPLE+'The Square Root Of The Number is An Integer'+color.END)
+        print('The Square Root Of The Number is An Integer')
     else:
-        print(color.PURPLE+'The Square Root Of The Number is not An Integer'+color.END)
+        print('The Square Root Of The Number is not An Integer')
 
 
 s = 1
 
-print(color.BLUE+f"\033[1mNUMBER GUESSING GAME\033[0m"+color.END+color.BLUE+'         '+'Author: Mahtab'+color.END)
+print(
+    "NUMBER GUESSING GAME" + '         ' + 'Author: Mahtab')
 
 while s == 1:
     user = 'a'
@@ -45,7 +37,7 @@ while s == 1:
     while not user.isdigit():
         user = input('Enter The Range Till Which You Want To Guess The Number: ')
         if not user.isdigit():
-            print(color.RED+'Invalid Number Or KeyWord..'+color.END)
+            print('Invalid Number Or KeyWord..')
             print()
 
     if int(user) < 10:
@@ -64,13 +56,14 @@ while s == 1:
     while us != str(target):
 
         if not us.isdigit() or not us:
-            print(color.RED+"You've Entered Characters Or Wrong Keyword, You Need To Type Numbers Instead Of It"+color.END)
+            print(
+                 "You've Entered Characters Or Wrong Keyword, You Need To Type Numbers Instead Of It")
             print()
             us = input("Try Again: ")
             continue
         else:
             if int(us) > user:
-                print(color.RED+"Sorry, Your Entered Number Was Not In The Range That You've Entered"+color.END)
+                print("Sorry, Your Entered Number Was Not In The Range That You've Entered")
                 print()
                 us = input("Try Again: ")
                 continue
@@ -81,7 +74,7 @@ while s == 1:
                         clue(target)
                         print()
                         us = input("Try Again: ")
-                        attempt+=1
+                        attempt += 1
                         continue
                     else:
                         wantclue = '1'
@@ -102,13 +95,14 @@ while s == 1:
                         us = input("Try Again: ")
                         continue
 
-
                 if int(us) != target:
-                    us = input(color.DARKCYAN+f"You Are Wrong, You Need To Guess {'Higher' if int(us) < target else 'Lower'}: "+color.END)
+                    us = input(
+                        f"You Are Wrong, You Need To Guess {'Higher' if int(us) < target else 'Lower'}: ")
                     attempt += 1
                     print()
 
-    s = input(color.GREEN+f"You've Guessed It Right In {attempt+1} attempts, Enter 1 If You Want To Play Again: "+color.END)
+    s = input(
+        f"You've Guessed It Right In {attempt + 1} attempts, Enter 1 If You Want To Play Again: ")
 
     if s == '1':
         s = 1
